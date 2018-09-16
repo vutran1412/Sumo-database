@@ -67,5 +67,23 @@ weight_text = StringVar()
 weight_entry = Entry(window, textvariable=weight_text)
 weight_entry.grid(row=1, column=5)
 
+view_all_button = Button(window, text="View all", width=12)
+view_all_button.grid(row=3, column=0)
+
+search_button = Button(window, text="Search Wrestler", width=12)
+search_button.grid(row=3, column=1)
+
+add_entry_button = Button(window, text="Add Wrestler", width=12)
+add_entry_button.grid(row=3, column=2)
+
+update_entry_button = Button(window, text="Update Wrestler", width=12)
+update_entry_button.grid(row=3, column=3)
+
+delete_entry_button = Button(window, text="Delete Wrestler", width=12)
+delete_entry_button.grid(row=3, column=4)
+
+close_database_button = Button(window, text="Close Database", width=12)
+close_database_button.grid(row=3, column=5)
+
 
 window.mainloop()
