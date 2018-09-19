@@ -1,8 +1,10 @@
+# Sumo-database
+# Author: Vu Tran
+""" This is a GUI database management application to store Sumo wrestlers information """
 from tkinter import *
-from tkinter import ttk
-from DB import *
 from GUI import GUI
 
+# Main function to run the application
 def main():
     window = Tk()
     application = GUI(window)
