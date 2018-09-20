@@ -203,14 +203,15 @@ class GUI:
 
     # Function used to edit selected rows in the database
     def editing(self):
-        db = DB()
         self.message["text"] = ""
+        # Try block to catch index error, user must select a row to edit or warning message will display
         try:
             self.treeview.item(self.treeview.selection())["values"][0]
         except IndexError as e:
             self.message["text"] = "Select Wrestler to edit"
             return e
 
+        # Assign old values to display in the new edit window
         id = self.treeview.item(self.treeview.selection())["text"]
         old_name = self.treeview.item(self.treeview.selection())["values"][0]
         old_nickname = self.treeview.item(self.treeview.selection())["values"][1]
@@ -221,9 +222,11 @@ class GUI:
         old_weight = self.treeview.item(self.treeview.selection())["values"][6]
         old_record = self.treeview.item(self.treeview.selection())["values"][7]
 
+        # Instantiate new edit window
         self.edit_window = Toplevel()
         self.edit_window.title("Edit Wrestler")
 
+        # Set up frames to contain all the widgets
         old_frame = LabelFrame(self.edit_window, text="Old Data")
         old_frame.grid(row=0, column=0)
 
@@ -233,7 +236,9 @@ class GUI:
         button_frame = Label(self.edit_window)
         button_frame.grid(row=2, column=0)
 
+        # Set up the labels in the new edit window
         Label(old_frame, text="Name:").grid(row=0, column=1)
+        # Display all the old data in read only text boxes
         Entry(old_frame, textvariable=StringVar(self.edit_window, value=old_name),
               state="readonly").grid(row=0, column=2)
         Label(old_frame, text="Nick Name:").grid(row=1, column=1)
@@ -258,7 +263,10 @@ class GUI:
         Entry(old_frame, textvariable=StringVar(self.edit_window, value=old_record),
               state="readonly").grid(row=3, column=4)
 
+        # The new frame will display all the textboxes that will take user input
+        # Sets up the labels
         Label(new_frame, text="Name:").grid(row=0, column=1)
+        # Sets up the textbox
         new_name_txt = Entry(new_frame)
         new_name_txt.grid(row=0, column=2)
         Label(new_frame, text="Nick Name:").grid(row=1, column=1)
@@ -282,22 +290,37 @@ class GUI:
         Label(new_frame, text="Record:").grid(row=3, column=3)
         new_record_txt = Entry(new_frame)
         new_record_txt.grid(row=3, column=4)
+
+        # Passing the function object via lambda expression to the button command handler
+        # https://pythonconquerstheuniverse.wordpress.com/2011/08/29/lambda_tutorial/
         btn_save_change = Button(button_frame,
                                  text="Save Wrestler", width=10,
                                  command=lambda: self.update_wrestler(new_name_txt.get(), new_nick_name_txt.get(),
                                                                       new_age_txt.get(), new_rank_txt.get(),
                                                                       new_stable_txt.get(), new_height_txt.get(),
                                                                       new_weight_txt.get(), new_record_txt.get()))
+        #
         btn_save_change.grid(row=0, column=0, sticky=W)
 
+        # Infinite loop to keep the edit window open
         self.edit_window.mainloop()
 
+    # Function to update the database
     def update_wrestler(self, new_name, new_nick_name, new_age, new_rank, new_stable, new_height, new_weight, new_record):
+        # Create the database object
         db = DB()
+        # Update the database with new values
         db.update(new_name, new_nick_name, new_age, new_rank, new_stable, new_height, new_weight, new_record)
+        # close the edit window
         self.edit_window.destroy()
+        # Confirmation message to display in the main window
         self.message["text"] = "{} record changed".format(new_name)
+        # display the database table
         self.view_all()
 
+    # Search function to be implemented
     def search_wrestler(self):
+        # TODO // Create a new window called search window
+        # TODO // In the window create a combobox to allow user to select a search condiditon
+        # TODO // Create a function to display only the items found in the search into the Treeview
         pass
