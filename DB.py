@@ -49,11 +49,11 @@ class DB:
         return found_rows
 
     # Function to update values of an existing record in the database
-    def update(self, name, nick_name, age, rank, stable, height, weight, record):
+    def update(self, name, nick_name, age, rank, stable, height, weight, record, wrestler_id):
         # SQL statement to update
         self.cursor.execute("UPDATE wrestlers SET name=?, nick_name=?, age=?, rank=?,"
-                            " stable=?, height=?, weight=?, record=?",
-                            (name, nick_name, age, rank, stable, height, weight, record))
+                            " stable=?, height=?, weight=?, record=? WHERE id=?",
+                            (name, nick_name, age, rank, stable, height, weight, record, wrestler_id))
         self.conn.commit()
 
     # Function to delete a record

@@ -298,7 +298,7 @@ class GUI:
                                  command=lambda: self.update_wrestler(new_name_txt.get(), new_nick_name_txt.get(),
                                                                       new_age_txt.get(), new_rank_txt.get(),
                                                                       new_stable_txt.get(), new_height_txt.get(),
-                                                                      new_weight_txt.get(), new_record_txt.get()))
+                                                                      new_weight_txt.get(), new_record_txt.get(), id))
         #
         btn_save_change.grid(row=0, column=0, sticky=W)
 
@@ -306,11 +306,11 @@ class GUI:
         self.edit_window.mainloop()
 
     # Function to update the database
-    def update_wrestler(self, new_name, new_nick_name, new_age, new_rank, new_stable, new_height, new_weight, new_record):
+    def update_wrestler(self, new_name, new_nick_name, new_age, new_rank, new_stable, new_height, new_weight, new_record, id):
         # Create the database object
         db = DB()
         # Update the database with new values
-        db.update(new_name, new_nick_name, new_age, new_rank, new_stable, new_height, new_weight, new_record)
+        db.update(new_name, new_nick_name, new_age, new_rank, new_stable, new_height, new_weight, new_record, id)
         # close the edit window
         self.edit_window.destroy()
         # Confirmation message to display in the main window
