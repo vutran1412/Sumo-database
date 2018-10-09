@@ -1,2 +1,4 @@
 __pyc__
 *.pyc
+venv
+.idea/workspace.xml

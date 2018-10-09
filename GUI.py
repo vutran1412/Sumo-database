@@ -23,7 +23,9 @@ class GUI:
         tree_frame.grid(row=1, column=0)
 
         # Sets up the labels and textboxes in their specific spots on the grid inside the frame
+        # Set up the label name and position
         Label(frame, text="Name:").grid(row=1, column=1)
+        # Set up the textbox
         self.name = Entry(frame)
         self.name.grid(row=1, column=2)
 
@@ -62,9 +64,9 @@ class GUI:
         self.treeview.heading("#0", text="id", anchor=W)
         self.treeview.column("#0", stretch=NO, anchor=W, width=50)
         self.treeview.heading("Name", text="Name")
-        self.treeview.column("Name", stretch=YES, anchor=CENTER, width=80)
+        self.treeview.column("Name", stretch=YES, anchor=CENTER, width=100)
         self.treeview.heading("Nick Name", text="Nick Name")
-        self.treeview.column("Nick Name", stretch=YES, anchor=CENTER, width=80)
+        self.treeview.column("Nick Name", stretch=YES, anchor=CENTER, width=100)
         self.treeview.heading("Age", text="Age")
         self.treeview.column("Age", stretch=NO, anchor=CENTER, width=30)
         self.treeview.heading("Rank", text="Rank")
@@ -126,7 +128,7 @@ class GUI:
         # 8 columns in each record
         for row in db_row:
             self.treeview.insert("", END, text=row[0], values=(row[1], row[2], row[3], row[4], row[5],
-                                                             row[6], row[7], row[8]))
+                                                               row[6], row[7], row[8]))
 
     # Function to add new data
     def adding(self):
@@ -320,7 +322,12 @@ class GUI:
 
     # Search function to be implemented
     def search_wrestler(self):
-        # TODO // Create a new window called search window
+        # Instantiate a search window
+        self.search_window = Toplevel()
+        self.search_window.title("Search for a wrestler")
+
+        # Loop to keep the window open
+        self.search_window.mainloop()
         # TODO // In the window create a combobox to allow user to select a search condiditon
         # TODO // Create a function to display only the items found in the search into the Treeview
         pass
